@@ -29,6 +29,8 @@ def create_app(test_config=None):
     return 'We exist!'
 
   # register cli db commands
+  from . import db
+  db.init_app(app)
 
   # apply blueprints
 

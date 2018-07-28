@@ -53,6 +53,10 @@ coverage html  # open htmlcov/index.html in a browser
 
 # Docs and Design Notes
 
+## Database Schema
+
+![Database schema](docs/db-schema.png)
+
 ## Set up Wallowa Wildlife Production Site
 
 Set A records for `@` and `www` to point wallowawildlife.com the EC2 public IP.  
