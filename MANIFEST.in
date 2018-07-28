@@ -1,0 +1,4 @@
+include wallowawildlife/schema.sql
+graft wallowawildlife/static
+graft wallowawildlife/templates
+global-exclude *.pyc
