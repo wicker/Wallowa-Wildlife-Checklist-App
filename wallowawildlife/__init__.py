@@ -8,7 +8,7 @@ def create_app(test_config=None):
     # this secret will be overriden with the instance config
     SECRET_KEY='test',
     # store the database in the instance folder
-    DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite')
+    DATABASE=os.path.join(app.instance_path, 'wallowawildlife.sqlite')
   )
 
   if test_config is None:
@@ -16,7 +16,7 @@ def create_app(test_config=None):
     app.config.from_pyfile('config.py', silent=True)
   else:
     # otherwise, load the test config
-    app.config.pdate(test_config)
+    app.config.update(test_config)
 
   # make the instance folder if it doesn't exist
   try:
@@ -24,9 +24,9 @@ def create_app(test_config=None):
   except OSError:
     pass
 
-  @app.route('/test')
-  def route_test():
-    return 'We exist!'
+  @app.route('/hello')
+  def route_hello():
+    return 'Hello, World!'
 
   # register cli db commands
   from . import db
@@ -37,5 +37,10 @@ def create_app(test_config=None):
   app.register_blueprint(auth.bp)
 
   # possibly add a url rule handling '/' for index
+  # make url_for('index') == url_for('blog.index')
+  # in another app, you might define a separate main index here with
+  # app.route, while giving the blog blueprint a url_prefix, but for
+  # the tutorial the blog will be the main index
+  app.add_url_rule('/', endpoint='index')
 
   return app
