@@ -2,12 +2,56 @@
 
 This app uses the Python-based microframework Flask and an SQLite3 database to allow users to log in and maintain wildlife checklists for Wallowa County. The database model supports users, checklists, types of creatures, and the creatures themselves. The Flask app builds the database from a .csv file so it is adaptable to any other location, real or imagined. 
 
-1. Clone the repo 
-1. Create the python virtual environment
-1. Run pip install -r requirements.txt
-1. Initialize the db with `flask initdb`
-1. Start the app with `flask run`
-1. Navigate to the app in the browser
+The app is architected as an application factory using blueprints and test coverage. It was developed using the [Flaskr tutorial](http://flask.pocoo.org/docs/1.0/tutorial/) as a guide to these new features in Flask.
+
+## Install
+
+Clone the git repository.
+
+```
+https://github.com/wicker/Wallowa-Wildlife-Checklist-App.git
+```
+
+Create the Python [virtual environment](https://virtualenvwrapper.readthedocs.io/en/latest/).
+
+```
+mkvirtualenv wallowa
+workon wallowa
+```
+
+Install the app.
+
+```
+pip install -e .
+```
+
+## Run
+
+```
+export FLASK_APP=wallowawildlife
+export FLASK_ENV=development
+flask initdb
+flask run
+```
+
+Open [http://127.0.0.1:5000/](http://127.0.0.1:5000/) in a browser.
+
+## Test
+
+```
+pip install '.[test]'
+pytest
+```
+
+Run with a coverage report.
+
+```
+coverage run -m pytest
+coverage report
+coverage html  # open htmlcov/index.html in a browser
+```
+
+# Docs and Design Notes
 
 ## Set up Wallowa Wildlife Production Site
 
