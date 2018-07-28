@@ -1,8 +1,16 @@
+# -*- coding: utf-8 -*-
+"""Auth Blueprint
+
+This module describes the blueprint for authorization-related
+functions for a Flask app.
+"""
+
 import functools
 
 from flask import (
   Blueprint, flash, g, redirect, render_template, request, session, url_for
-  )
+)
+
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from wallowawildlife.db import get_db
@@ -12,6 +20,8 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 # this function is verbatim from flaskr tutorial
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+  """Handle the GET and POST methods of user registration"""
+
   if request.method == 'POST':
     name = request.form['name']
     password = request.form['password']
@@ -23,7 +33,7 @@ def register():
     elif not password:
       error = 'Password is required.'
     elif db.execute(
-      'SELECT id FROM user WHERE name = ?', (name,)
+        'SELECT id FROM user WHERE name = ?', (name,)
     ).fetchone() is not None:
       error = 'User {} is already registered.'.format(name)
 
@@ -42,6 +52,8 @@ def register():
 # this function is verbatim from the flaskr tutorial
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
+  """Handle the GET and POST methods of user login"""
+
   if request.method == 'POST':
     name = request.form['name']
     password = request.form['password']
@@ -68,11 +80,14 @@ def login():
 # this function is verbatim from flaskr tutorial
 @bp.route('/logout')
 def logout():
+  """Handle user logging out"""
+
   session.clear()
   return redirect(url_for('index'))
 
 # this function is verbatim from flaskr tutorial
 def login_required(view):
+  """Redirect to the login screen"""
   @functools.wraps(view)
   def wrapped_view(**kwargs):
     if g.user is None:

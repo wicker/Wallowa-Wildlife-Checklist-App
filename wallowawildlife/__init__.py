@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+""" Application Factory
+
+This is the entry point to the entire application.
+"""
+
 import os
 from flask import Flask
 
