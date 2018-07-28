@@ -24,7 +24,7 @@ def create_app(test_config=None):
   except OSError:
     pass
 
-  @app.route('/')
+  @app.route('/test')
   def route_test():
     return 'We exist!'
 
@@ -33,6 +33,8 @@ def create_app(test_config=None):
   db.init_app(app)
 
   # apply blueprints
+  from . import auth
+  app.register_blueprint(auth.bp)
 
   # possibly add a url rule handling '/' for index
 
