@@ -25,12 +25,20 @@
 
   </header>
 
-  <section class="content">
-    <header>
-      {% block header %}{% endblock %}
-    </header>
+  <nav>
+    <ul>
+      <li>List</li>
+      <li>of</li>
+      <li>Creature</li>
+      <li>Types</li>
+      <li>Here</li>
+    </ul>
+  </nav>
+
+  {% block content %}{% endblock %}
+
+  <section>
     {% for message in get_flashed_messages() %}
       <div class="flash">{{ message }}</div>
     {% endfor %}
-    {% block content %}{% endblock %}
   </section>
