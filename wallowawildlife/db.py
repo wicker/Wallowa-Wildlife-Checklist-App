@@ -39,6 +39,19 @@ def init_db():
   with current_app.open_resource('schema.sql') as f:
     db.executescript(f.read().decode('utf-8'))
 
+  # manually add list of creature types
+  types = [('Mammal','mammal'),
+           ('Bird','bird'),
+           ('Reptile/Amphibian','reptile_amphibian'),
+           ('Tree/Shrub','tree_shrub'),
+           ('Fish','fish'),
+           ('Wildflower','wildflower'),
+           ('Spider/Insect','spider_insect')]
+  for t in types:
+    db.execute(
+        'INSERT INTO creature_type (name, url_text) VALUES (?,?)',
+        (t[0],t[1]))
+    db.commit()
 
 @click.command('initdb')
 @with_appcontext

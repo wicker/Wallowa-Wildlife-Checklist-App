@@ -27,12 +27,12 @@
 
   <nav>
     <ul>
-      <li>List</li>
-      <li>of</li>
-      <li>Creature</li>
-      <li>Types</li>
-      <li>Here</li>
-    </ul>
+			{% for t in types %}
+        <li>
+						{{ t.name }}
+				</li>
+			{% endfor %}
+		</ul>
   </nav>
 
   {% block content %}{% endblock %}

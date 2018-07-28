@@ -30,8 +30,13 @@ def create_app(test_config=None):
   except OSError:
     pass
 
+  from wallowawildlife.db import get_db
+
   @app.route('/hello')
   def route_hello():
+    db = get_db()
+    types = db.execute('SELECT name FROM creature_type').fetchall()
+    print(types)
     return 'Hello, World!'
 
   # register cli db commands

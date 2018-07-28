@@ -3,6 +3,9 @@
 
 This module describes the blueprint for authorization-related
 functions for a Flask app.
+
+These functions were copied over verbatim from the flaskr tutorial
+before being modified for this application.
 """
 
 import functools
@@ -17,10 +20,13 @@ from wallowawildlife.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
-# this function is verbatim from flaskr tutorial
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
   """Handle the GET and POST methods of user registration"""
+
+  db = get_db()
+  types = db.execute('SELECT name FROM creature_type').fetchall()
 
   if request.method == 'POST':
     name = request.form['name']
@@ -47,12 +53,15 @@ def register():
 
     flash(error)
 
-  return render_template('auth/register.html')
+  return render_template('auth/register.html',types=types)
 
-# this function is verbatim from the flaskr tutorial
+
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
   """Handle the GET and POST methods of user login"""
+
+  db = get_db()
+  types = db.execute('SELECT name FROM creature_type').fetchall()
 
   if request.method == 'POST':
     name = request.form['name']
@@ -75,17 +84,20 @@ def login():
 
     flash(error)
 
-  return render_template('auth/login.html')
+  return render_template('auth/login.html',types=types)
 
-# this function is verbatim from flaskr tutorial
+
 @bp.route('/logout')
 def logout():
   """Handle user logging out"""
 
+  db = get_db()
+  types = db.execute('SELECT name FROM creature_type').fetchall()
+
   session.clear()
   return redirect(url_for('index'))
 
-# this function is verbatim from flaskr tutorial
+
 def login_required(view):
   """Redirect to the login screen"""
   @functools.wraps(view)
