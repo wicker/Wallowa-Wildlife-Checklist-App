@@ -1,24 +1,36 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Wallowa Wildlife</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<nav>
-  <h1>Flaskr</h1>
-  <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['name'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-    {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
-    {% endif %}
-  </ul>
-</nav>
-<section class="content">
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %} - Wallowa Wildlife</title>
+
+  <meta name="description" content="Wildlife sighting checklists for Wallowa County, Oregon">
+  <meta name="author" content="Jenner Hanni">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
   <header>
-    {% block header %}{% endblock %}
+
+    <img src="{{ url_for('static', filename='img/hawk.png') }}">
+    <h1>Wallowa Wildlife</h1>
+  
+    <ul>
+      {% if g.user %}
+        <li><span>{{ g.user['name'] }}</span>
+        <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      {% else %}
+        <li><a href="{{ url_for('auth.register') }}">Register</a>
+        <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      {% endif %}
+    </ul>
+
   </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+
+  <section class="content">
+    <header>
+      {% block header %}{% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+  </section>
