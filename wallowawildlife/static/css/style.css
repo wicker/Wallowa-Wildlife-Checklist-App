@@ -92,3 +92,7 @@ table tr:nth-child(even) td{
 .center {
   text-align: center;
 }
+
+.wildlife {
+  width: 50%;
+}
