@@ -58,3 +58,13 @@ def addCreature():
   types = db.execute('SELECT * FROM creature_type').fetchall()
 
   return render_template('/lists/creature_add.html', types=types)
+
+@bp.route('/wildlife/<int:creature_id>/')
+def showCreature(creature_id):
+  db = get_db()
+  types = db.execute('SELECT * FROM creature_type').fetchall()
+  creature = db.execute('SELECT * FROM creature WHERE id = ?',
+                         (creature_id,)).fetchone()
+
+  return render_template('/lists/creature_show.html', types=types,
+                         creature=creature)
