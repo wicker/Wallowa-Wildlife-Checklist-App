@@ -57,6 +57,39 @@ coverage html  # open htmlcov/index.html in a browser
 
 ![Database schema](docs/db-schema.png)
 
+## Populating the Database
+
+The `creature_type` table is manually populated by `flask initdb`.
+
+|id|name|url_text|
+|--|----|--------|
+|1|Mammal|mammal|
+|2|Bird|bird|
+|3|Reptile/Amphibian|reptile_amphibian|
+|4|Tree/Shrub|tree_shrub|
+|5|Fish|fish|
+|6|Wildflower|wildflower|
+|7|Spider/Insect|spider_insect|
+
+The `creature` table is populated by a CSV file called db.csv. The program expects it will take this format: 
+
+|Fields|Example|
+|------|-------|
+|Common Name|Rocky Mountain Elk|
+|Latin Name|Cervus canadensis|
+|Type|mammal|
+|Description|One of the largest land mammals, elk range in forest and forest-edge habitats.|
+|Photo URL|https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Rocky_Mountain_Bull_Elk.jpg/1024px-Rocky_Mountain_Bull_Elk.jpg|
+|Wiki URL|https://en.wikipedia.org/wiki/Elk|
+
+The `Type` entry must match one of the `url_text` entries above.
+
+All creatures initialized by the db are owned by the admin user with id `1` and may not be edited or deleted by non-admin users.
+
+The `user` table is set up with an admin and a user account.
+
+&raquo; look at Flaskr for how they handled these
+
 ## Set up Wallowa Wildlife Production Site
 
 Set A records for `@` and `www` to point wallowawildlife.com the EC2 public IP.  

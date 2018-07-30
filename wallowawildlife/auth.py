@@ -26,7 +26,7 @@ def register():
   """Handle the GET and POST methods of user registration"""
 
   db = get_db()
-  types = db.execute('SELECT name FROM creature_type').fetchall()
+  types = db.execute('SELECT * FROM creature_type').fetchall()
 
   if request.method == 'POST':
     name = request.form['name']
@@ -61,7 +61,7 @@ def login():
   """Handle the GET and POST methods of user login"""
 
   db = get_db()
-  types = db.execute('SELECT name FROM creature_type').fetchall()
+  types = db.execute('SELECT * FROM creature_type').fetchall()
 
   if request.method == 'POST':
     name = request.form['name']
@@ -92,7 +92,7 @@ def logout():
   """Handle user logging out"""
 
   db = get_db()
-  types = db.execute('SELECT name FROM creature_type').fetchall()
+  types = db.execute('SELECT * FROM creature_type').fetchall()
 
   session.clear()
   return redirect(url_for('index'))

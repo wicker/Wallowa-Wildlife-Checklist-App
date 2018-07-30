@@ -35,8 +35,9 @@ def create_app(test_config=None):
   @app.route('/hello')
   def route_hello():
     db = get_db()
-    types = db.execute('SELECT name FROM creature_type').fetchall()
-    print(types)
+    creatures = db.execute('SELECT * FROM creature').fetchall()
+    for c in creatures:
+      print(c['name_common'])
     return 'Hello, World!'
 
   # register cli db commands
