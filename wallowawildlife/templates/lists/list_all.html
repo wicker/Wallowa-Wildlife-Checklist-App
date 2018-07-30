@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="lists">
+  <h1>List All Creatures</h1>
+
+  <ul>
+  {% for c in creatures %}
+  <li>{{ c.name_common }}</li>
+  {% endfor %}
+  </ul>
+
+</section>
+{% endblock %}
