@@ -6,6 +6,7 @@ This is the entry point to the entire application.
 
 import os
 from flask import Flask
+from flask import render_template
 
 def create_app(test_config=None):
   """Create an instance of Wallowa Wildlife Checklists"""
@@ -42,6 +43,12 @@ def create_app(test_config=None):
     for u in users:
       print(u['id'],u['name'],u['password'])
     return 'Hello, World!'
+
+  @app.route('/')
+  def index():
+    db = get_db()
+    types = db.execute('SELECT * FROM creature_type').fetchall()
+    return render_template('front_page.html', types=types)
 
   # register cli db commands
   from . import db

@@ -19,9 +19,10 @@ from wallowawildlife.db import get_db
 
 bp = Blueprint('lists', __name__)
 
-@bp.route('/')
-def index():
+@bp.route('/all')
+def list_all():
   db = get_db()
+  types = db.execute('SELECT * FROM creature_type').fetchall()
   creatures = db.execute('SELECT * FROM creature').fetchall()
-  return render_template('lists/list_all.html', creatures=creatures)
+  return render_template('lists/list_all.html', types=types, creatures=creatures)
 
