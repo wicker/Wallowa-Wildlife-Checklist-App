@@ -5,8 +5,7 @@ This is the entry point to the entire application.
 """
 
 import os
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, jsonify
 
 def create_app(test_config=None):
   """Create an instance of Wallowa Wildlife Checklists"""
@@ -38,6 +37,20 @@ def create_app(test_config=None):
     db = get_db()
     types = db.execute('SELECT * FROM creature_type').fetchall()
     return render_template('front_page.html', types=types)
+
+  @app.route('/wildlife/JSON')
+  def wildlifeJSON():
+    db = get_db()
+    creatures = db.execute('SELECT * FROM creature').fetchall()
+    json_creatures = [{'name_common':c['name_common'],
+                       'name_latin':c['name_latin'],
+                       'description':c['description'],
+                       'id':c['id'],
+                       'photo_url':c['photo_url'],
+                       'wiki_url':c['wiki_url'],
+                       'type':c['type_id']} for c in creatures]
+
+    return jsonify(json_creatures)
 
   # register cli db commands
   from . import db
