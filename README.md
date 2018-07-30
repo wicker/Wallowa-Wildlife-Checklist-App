@@ -82,7 +82,7 @@ The `creature` table is populated by a CSV file called db.csv. The program expec
 |Photo URL|https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Rocky_Mountain_Bull_Elk.jpg/1024px-Rocky_Mountain_Bull_Elk.jpg|
 |Wiki URL|https://en.wikipedia.org/wiki/Elk|
 
-The `Type` entry must match one of the `url_text` entries above.
+The `Type` entry must match one of the `url_text` entries in the `creature_type` table above.
 
 All creatures initialized by the db are owned by the admin user with id `1` and may not be edited or deleted by non-admin users.
 

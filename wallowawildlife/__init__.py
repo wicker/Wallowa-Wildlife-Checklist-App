@@ -38,6 +38,9 @@ def create_app(test_config=None):
     creatures = db.execute('SELECT * FROM creature').fetchall()
     for c in creatures:
       print(c['name_common'])
+    users = db.execute('SELECT * FROM user').fetchall()
+    for u in users:
+      print(u['id'],u['name'],u['password'])
     return 'Hello, World!'
 
   # register cli db commands

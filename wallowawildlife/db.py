@@ -50,44 +50,57 @@ def init_db():
            ('Spider/Insect','spider_insect')]
   for t in types:
     db.execute(
-        'INSERT INTO creature_type (name, url_text) VALUES (?,?)',
-        (t[0],t[1]))
+      'INSERT INTO creature_type (name, url_text) VALUES (?,?)',
+      (t[0],t[1]))
     db.commit()
 
-    with open('db.csv', 'r') as f:
-      for line in f:
-        line = line.split(',')
+  # load the list of creatures from the CSV file
+  with open('db.csv', 'r') as f:
+    for line in f:
+      line = line.split(',')
 
-        # convert type_id from text to integer
-        if line[2] == 'mammal':
-          line[2] = 1
-        elif line[2] == 'bird':
-          line[2] = 2
-        elif line[2] == 'reptile_amphibian':
-          line[2] = 3
-        elif line[2] == 'tree_shrub':
-          line[2] = 4
-        elif line[2] == 'fish':
-          line[2] = 5
-        elif line[2] == 'wildflower':
-          line[2] = 6
-        elif line[2] == 'spider_insect':
-          line[2] = 7
+      # convert type_id from text to integer
+      if line[2] == 'mammal':
+        line[2] = 1
+      elif line[2] == 'bird':
+        line[2] = 2
+      elif line[2] == 'reptile_amphibian':
+        line[2] = 3
+      elif line[2] == 'tree_shrub':
+        line[2] = 4
+      elif line[2] == 'fish':
+        line[2] = 5
+      elif line[2] == 'wildflower':
+        line[2] = 6
+      elif line[2] == 'spider_insect':
+        line[2] = 7
 
-        # load this into the right table
-        # user id of '1' is 'admin' user
-        db.execute('INSERT INTO creature (name_common, \
-                                          name_latin,  \
-                                          type_id,     \
-                                          description, \
-                                          photo_url,   \
-                                          wiki_url,    \
-                                          user_id)     \
-          VALUES (?,?,?,?,?,?,?)',
-          (line[0], line[1], line[2],
-           line[3], line[4], line[5], 1)
-        )
-        db.commit()
+      # load this into the right table
+      # user id of '1' is 'admin' user
+      db.execute('INSERT INTO creature (name_common, \
+                                        name_latin,  \
+                                        type_id,     \
+                                        description, \
+                                        photo_url,   \
+                                        wiki_url,    \
+                                        user_id)     \
+        VALUES (?,?,?,?,?,?,?)',
+        (line[0], line[1], line[2],
+         line[3], line[4], line[5], 1)
+      )
+      db.commit()
+
+  # manually add the list of users
+  # TODO: make actual passwords
+  users = [('admin','dev'),
+           ('testuser','dev')]
+
+  for u in users:
+    db.execute(
+      'INSERT INTO user (name, password) VALUES (?,?)',
+      (u[0],u[1])
+    )
+    db.commit()
 
 
 @click.command('initdb')
