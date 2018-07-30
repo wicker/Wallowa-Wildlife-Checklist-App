@@ -59,22 +59,6 @@ def init_db():
     for line in f:
       line = line.split(',')
 
-      # convert type_id from text to integer
-      if line[2] == 'mammal':
-        line[2] = 1
-      elif line[2] == 'bird':
-        line[2] = 2
-      elif line[2] == 'reptile_amphibian':
-        line[2] = 3
-      elif line[2] == 'tree_shrub':
-        line[2] = 4
-      elif line[2] == 'fish':
-        line[2] = 5
-      elif line[2] == 'wildflower':
-        line[2] = 6
-      elif line[2] == 'spider_insect':
-        line[2] = 7
-
       # load this into the right table
       # user id of '1' is 'admin' user
       db.execute('INSERT INTO creature (name_common, \
