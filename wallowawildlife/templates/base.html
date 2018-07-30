@@ -1,4 +1,6 @@
 <!doctype html>
+<html lang="en">
+<head>
   <meta charset="utf-8">
   <title>{% block title %}{% endblock %} - Wallowa Wildlife</title>
 
@@ -7,10 +9,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
   
+<body>
   <header>
 
-    <img src="{{ url_for('static', filename='img/hawk.png') }}">
+    <img src="{{ url_for('static', filename='img/hawk.png') }}"
+         alt="Hawk logo">
     <h1><a href="{{ url_for('index') }}">Wallowa Wildlife</a></h1>
   
     <ul>
@@ -28,16 +33,19 @@
   <nav>
     <ul>
       <li><a href="{{ url_for('lists.list_all') }}">All</a></li>
-			{% for t in types %}
-        <li>{{ t.name }}</li>
-			{% endfor %}
-		</ul>
+    {% for t in types %}
+      <li>{{ t.name }}</li>
+    {% endfor %}
+    </ul>
   </nav>
 
   {% block content %}{% endblock %}
 
-  <section>
+  <section id="messages">
     {% for message in get_flashed_messages() %}
       <div class="flash">{{ message }}</div>
     {% endfor %}
   </section>
+
+</body>
+</html>
