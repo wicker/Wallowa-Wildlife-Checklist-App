@@ -71,7 +71,7 @@ def addCreature():
                 )
     )
     db.commit()
-
+    flash("Successfully added " + creature['name_common'])
     return redirect(url_for('lists.listAll'))
 
   return render_template('/lists/creature_add.html', types=types)
@@ -86,12 +86,36 @@ def showCreature(creature_id):
   return render_template('/lists/creature_show.html', types=types,
                          creature=creature)
 
-@bp.route('/wildlife/<int:creature_id>/edit')
+@bp.route('/wildlife/<int:creature_id>/edit', methods=['GET','POST'])
 def editCreature(creature_id):
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
+
+  if request.method == 'POST':
+
+    # only use new values if they were submitted
+    name_common = request.form['name_common']
+    name_latin = request.form['name_latin']
+    description = request.form['description']
+    photo_url = request.form['photo_url']
+    wiki_url = request.form['wiki_url']
+    user_id = 1
+    type_id = request.form['type_id']
+
+    db.execute('UPDATE creature SET name_common = ?,'
+               'name_latin = ?, description = ?,'
+               'photo_url = ?, wiki_url = ?,'
+               'user_id = ?, type_id = ?'
+               ' WHERE id = ?',
+               (name_common, name_latin, description,
+                photo_url, wiki_url, user_id, type_id,
+                creature_id)
+    )
+    db.commit()
+    flash("Successfully edited " + creature['name_common'])
+    return redirect(url_for('lists.listAll'))
 
   return render_template('/lists/creature_edit.html', types=types,
                          creature=creature)

@@ -2,7 +2,47 @@
 
 {% block content %}
 <section id="lists">
-  <h1>Edit {{ creature.name_common }}</h1>
+  <h2>Edit {{ creature.name_common }}</h2>
 
+  <p>You can leave any form entries blank if you want to leave them unchanged.</p>
+
+	<form action="{{ url_for('lists.editCreature', creature_id = creature.id)}}" method='POST'>
+		<p>Common Name: <br />
+    <input type="text" size="30" name="name_common" placeholder="{{ creature.name_common }}"> 
+		</p>
+		
+		<p>Latin Name: <br />
+    <input type="text" size="30" name="name_latin" placeholder="{{ creature.name_latin }}"> 
+		</p>
+
+		<p>Description: <br />
+    <input type="textbox" size="30" name="description" placeholder="{{ creature.description }}"> 
+		</p>
+
+		<p>Photo URL: <br />
+    <input type="text" size="30" name="photo_url" placeholder="{{ creature.photo_url }}"> 
+		</p>
+
+		<p>Wikipedia URL: <br />
+    <input type="text" size="30" name="wiki_url" placeholder="{{ creature.wiki_url }}"> 
+		</p>
+
+		<p>Type: <br />
+      <select name="type_id">
+        {% for t in types %}
+          {% if t.url_text == creature.type_id %}
+            <option value="{{ t.url_text }}" selected>{{ t.name }}</option>
+          {% else %}
+            <option value="{{ t.url_text }}">{{ t.name }}</option>
+          {% endif %}
+        {% endfor %}
+		</p>
+
+    <p>
+		  <input type="submit", value="Edit">
+    </p>
+	</form>
+
+	<a href= '{{url_for('lists.showCreature', creature_id = creature.id)}}'>Cancel</a>
 </section>
 {% endblock %}
