@@ -33,17 +33,17 @@ def listByType(url_text):
   creatures = db.execute('SELECT * FROM creature').fetchall()
   creaturesDisplayable = []
 
-  if url_text == 'spider_insect':
-    title = 'Spiders/Insects'
-  elif url_text == 'reptile_amphibian':
-    title = 'Reptiles/Amphibians'
-  elif url_text == 'tree_shrub':
-    title = 'Tree/Shrub'
-  elif url_text == 'fish':
-    title = 'Fishes'
-  else:
-    title = url_text.capitalize() + 's'
+  title = ''
+  # check to see if URL is looking for a valid creature type
+  for t in types:
+    if url_text == t['url_text']:
+      title = t['name']
 
+  # if there's no title, the URL doesn't match possible creature types
+  if title == '':
+    return redirect(url_for('index'))
+
+  # otherwise, only show the creatures of the desired type
   for c in creatures:
     if (c['type_id'] == url_text):
       creaturesDisplayable.append(c)
