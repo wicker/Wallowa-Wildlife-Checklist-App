@@ -2,11 +2,44 @@
 
 {% block content %}
 <section id="lists">
-  <h1>Add a Creature</h1>
+  <h1>Add a new plant or animal</h1>
 
   <p>It will be visible to everyone but you will own and be the only one able to edit or delete this creature.</p>
 
-  <p>Insert form here</p>
+	<form action="{{ url_for('lists.addCreature')}}" method='POST'>
+		<p>Common Name: <br />
+		  <input type="text" size="30" name="name_common" placeholder="Common Name"> 
+		</p>
+		
+		<p>Latin Name: <br />
+		  <input type="text" size="30" name="name_latin" placeholder="Latin Name"> 
+		</p>
+
+		<p>Description: <br />
+		  <input type="textbox" size="30" name="description" placeholder="Brief one-sentence description"> 
+		</p>
+
+		<p>Photo URL: <br />
+		  <input type="text" size="30" name="photo_url" placeholder="http://example.org/example.jpg"> 
+		</p>
+
+		<p>Wikipedia URL: <br />
+		  <input type="text" size="30" name="wiki_url" placeholder="https://en.wikipedia.org/wiki/example"> 
+		</p>
+
+		<p>Type: <br />
+      <select name="type_id">
+        {% for t in types %}
+        <option value="{{ t.url_text }}">{{ t.name }}</option>
+        {% endfor %}
+		</p>
+
+    <p>
+		  <input type="submit", value="Add">
+    </p>
+	</form>
+
+	<a href= '{{url_for('lists.listAll')}}'>Cancel</a>
 
 </section>
 {% endblock %}
