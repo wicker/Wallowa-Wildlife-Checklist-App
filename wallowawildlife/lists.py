@@ -71,7 +71,7 @@ def addCreature():
                 )
     )
     db.commit()
-    flash("Successfully added " + creature['name_common'])
+    flash("Successfully added " + request.form['name_common'])
     return redirect(url_for('lists.listAll'))
 
   return render_template('/lists/creature_add.html', types=types)
@@ -96,13 +96,37 @@ def editCreature(creature_id):
   if request.method == 'POST':
 
     # only use new values if they were submitted
-    name_common = request.form['name_common']
-    name_latin = request.form['name_latin']
-    description = request.form['description']
-    photo_url = request.form['photo_url']
-    wiki_url = request.form['wiki_url']
+    if request.form['name_common']:
+      name_common = request.form['name_common']
+    else:
+      name_common = creature['name_common']
+
+    if request.form['name_latin']:
+      name_latin = request.form['name_latin']
+    else:
+      name_latin = creature['name_latin']
+
+    if request.form['description']:
+      description = request.form['description']
+    else:
+      description = creature['description']
+
+    if request.form['photo_url']:
+      photo_url = request.form['photo_url']
+    else:
+      photo_url = creature['photo_url']
+
+    if request.form['wiki_url']:
+      wiki_url = request.form['wiki_url']
+    else:
+      wiki_url = creature['wiki_url']
+
+    if request.form['type_id']:
+      type_id = request.form['type_id']
+    else:
+      type_id = creature['type_id']
+
     user_id = 1
-    type_id = request.form['type_id']
 
     db.execute('UPDATE creature SET name_common = ?,'
                'name_latin = ?, description = ?,'
@@ -130,7 +154,7 @@ def deleteCreature(creature_id):
   if request.method == 'POST':
     db.execute('DELETE FROM creature where id = ?', (creature_id,))
     db.commit()
-    #flash("Successfully deleted " + creature.name_common)
+    flash("Successfully deleted " + creature['name_common'])
     return redirect(url_for('lists.listAll'))
   else:
     return render_template('/lists/creature_delete.html', types=types,

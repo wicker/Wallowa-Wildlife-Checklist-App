@@ -43,13 +43,13 @@
     </ul>
   </nav>
 
-  {% block content %}{% endblock %}
-
   <section id="messages">
     {% for message in get_flashed_messages() %}
       <div class="flash">{{ message }}</div>
     {% endfor %}
   </section>
+
+  {% block content %}{% endblock %}
 
 </body>
 </html>
