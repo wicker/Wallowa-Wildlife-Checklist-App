@@ -24,7 +24,8 @@ def listAll():
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
   creatures = db.execute('SELECT * FROM creature').fetchall()
-  return render_template('lists/list_all.html', types=types, creatures=creatures)
+  return render_template('lists/list.html', types=types,
+      creatures=creatures, page_title='All')
 
 @bp.route('/wildlife/<url_text>')
 def listByType(url_text):
@@ -48,6 +49,7 @@ def listByType(url_text):
     if (c['type_id'] == url_text):
       creaturesDisplayable.append(c)
 
-  return render_template('lists/list_by_type.html', types=types,
+  return render_template('lists/list.html', types=types,
       creatures=creaturesDisplayable, page_title=title)
+
 
