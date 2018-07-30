@@ -5,16 +5,34 @@ body {
   background: #fff; 
 }
 
+a, a:visited {
+  color: #1d681d;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #5c5353;
+}
+
 header {
   background-color: #242b32;
   color: #fff;
   clear: both;
+  display: grid;
   height: 150px;
   padding: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: center;
 }
 
-header a, header a:visited {
+header a, 
+header a:visited {
   color: #fff;
+  text-decoration: none;
 }
 
 header a:hover {
@@ -22,16 +40,17 @@ header a:hover {
 }
 
 header img {
-  float: left;
+  display: block;
+  margin: 0 auto;
   width: 100px;
-  margin: 20px;
   padding-right: 40px;
 }
 
 nav {
+  background-color: #44515e;
   list-style: none;
-  margin: 20px 0 40px;
-  padding: 0;
+  margin: 0 0 40px 0;
+  padding: 20px 0;
   text-align: center;
 }
 
@@ -41,12 +60,12 @@ nav li {
 }
 
 nav a, nav a:visited {
-  color: #474eff;
   display: inline-block;
+  color: #fff;
 }
 
-nav a:hover {
-  color: #616447
+ul {
+  list-style: none;
 }
 
 section {
@@ -79,10 +98,11 @@ table tr {
 
 table th, td {
   padding: 10px;
+  text-align: left;
 }
 
 table tr:nth-child(odd) td{
-  background-color: #cfcfcf;
+  background-color: #efefef;
   margin: -1px;
 }
 
