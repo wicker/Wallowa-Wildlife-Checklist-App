@@ -12,16 +12,21 @@
     <tr>
       <th>Common Name</td>
       <th>Latin Name</td>
-      <th>&nbsp;</td>
-      <th>&nbsp;</td>
+      <th>Edit</td>
+      <th>Delete</td>
     </tr>
 
     {% for c in creatures %}
     <tr>
       <td><a href="{{ url_for('lists.showCreature', creature_id=c.id) }}">{{ c.name_common }}</a></td>
       <td><em>{{ c.name_latin }}</em></td>
-      <td><a class="button" href='{{url_for('lists.editCreature', creature_id = c.id) }}'>Edit</a></td>
-      <td><a class="button" href='{{url_for('lists.deleteCreature', creature_id = c.id) }}'>Delete</a></td>
+      {% if c.user_id == g.user['id'] %}
+        <td><a class="button" href='{{url_for('lists.editCreature', creature_id = c.id) }}'>Edit</a></td>
+        <td><a class="button" href='{{url_for('lists.deleteCreature', creature_id = c.id) }}'>Delete</a></td>
+      {% else %}
+        <td></td>
+        <td></td>
+      {% endif %}
     </tr>
     {% endfor %}
 
