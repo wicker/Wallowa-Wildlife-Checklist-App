@@ -41,13 +41,13 @@ def init_db():
     db.executescript(f.read().decode('utf-8'))
 
   # manually add list of creature types
-  types = [('Mammal','mammal'),
-           ('Bird','bird'),
-           ('Reptile/Amphibian','reptile_amphibian'),
-           ('Tree/Shrub','tree_shrub'),
-           ('Fish','fish'),
-           ('Wildflower','wildflower'),
-           ('Spider/Insect','spider_insect')]
+  types = [('Mammals','mammal'),
+           ('Birds','bird'),
+           ('Reptiles & Amphibians','reptile_amphibian'),
+           ('Trees & Shrubs','tree_shrub'),
+           ('Fishes','fish'),
+           ('Wildflowers','wildflower'),
+           ('Spiders & Insects','spider_insect')]
   for t in types:
     db.execute(
       'INSERT INTO creature_type (name, url_text) VALUES (?,?)',
