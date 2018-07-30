@@ -79,12 +79,18 @@ def editCreature(creature_id):
   return render_template('/lists/creature_edit.html', types=types,
                          creature=creature)
 
-@bp.route('/wildlife/<int:creature_id>/delete')
+@bp.route('/wildlife/<int:creature_id>/delete', methods=['GET','POST'])
 def deleteCreature(creature_id):
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
 
-  return render_template('/lists/creature_delete.html', types=types,
+  if request.method == 'POST':
+    db.execute('DELETE FROM creature where id = ?', (creature_id,))
+    db.commit()
+    #flash("Successfully deleted " + creature.name_common)
+    return redirect(url_for('lists.listAll'))
+  else:
+    return render_template('/lists/creature_delete.html', types=types,
                          creature=creature)
