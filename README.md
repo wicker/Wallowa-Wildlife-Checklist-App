@@ -238,10 +238,4 @@ The relevant ports (80, 443) should already be enabled in Amazon's EC2 security 
 
 The app should be visible at `http://wallowawildlife.com`.
 
-## Use Flaskr Tutorial
-
-Continuous Integration/Deployment with Flask
-
-Flask blueprints and factories
-
 
