@@ -13,7 +13,7 @@ header {
   padding: 20px;
 }
 
-header a, a:visited {
+header a, header a:visited {
   color: #fff;
 }
 
@@ -28,3 +28,23 @@ header img {
   padding-right: 40px;
 }
 
+nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+nav li {
+  display: inline;
+  padding: 10px 20px;
+}
+
+nav a, nav a:visited {
+  color: #474eff;
+  display: inline-block;
+}
+
+nav a:hover {
+  color: #616447
+}
