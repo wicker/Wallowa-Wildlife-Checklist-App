@@ -88,7 +88,20 @@ All creatures initialized by the db are owned by the admin user with id `1` and 
 
 The `user` table is set up with an admin and a user account.
 
-&raquo; look at Flaskr for how they handled these
+## Blueprints, Routes, and Templates
+
+|Blueprint|Route|Route Handler|Template|
+|---------|-----|-------------|--------|
+|~|/|index()|front_page.html|
+|Auth|/register|register()|auth/register.html|
+|Auth|/login|login()|auth/login.html|
+|Auth|/logout|logout()|~|
+|Lists|/wildlife|listAll()|lists/list_all.html|
+|Lists|/wildlife/?t=mammals|listByType()|list_by_type.html|
+|Lists|/wildlife/add|addCreature()|creature_add.html|
+|Lists|/wildlife/mammals/10|showCreature()|creature_show.html|
+|Lists|/wildlife/mammals/10/edit|editCreature()|creature_edit.html|
+|Lists|/wildlife/mammals/10/delete|deleteCreature()|creature_delete.html|
 
 ## Set up Wallowa Wildlife Production Site
 
