@@ -68,3 +68,13 @@ def showCreature(creature_id):
 
   return render_template('/lists/creature_show.html', types=types,
                          creature=creature)
+
+@bp.route('/wildlife/<int:creature_id>/edit')
+def editCreature(creature_id):
+  db = get_db()
+  types = db.execute('SELECT * FROM creature_type').fetchall()
+  creature = db.execute('SELECT * FROM creature WHERE id = ?',
+                         (creature_id,)).fetchone()
+
+  return render_template('/lists/creature_edit.html', types=types,
+                         creature=creature)
