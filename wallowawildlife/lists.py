@@ -53,6 +53,7 @@ def listByType(url_text):
       creatures=creaturesDisplayable, page_title=title)
 
 @bp.route('/wildlife/add', methods=['GET','POST'])
+@login_required
 def addCreature():
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()

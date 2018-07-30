@@ -10,6 +10,7 @@ import sqlite3
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
+from werkzeug.security import generate_password_hash
 
 def get_db():
   """Make the database available in current app context"""
@@ -76,8 +77,8 @@ def init_db():
 
   # manually add the list of users
   # TODO: make actual passwords
-  users = [('admin','dev'),
-           ('testuser','dev')]
+  users = [('admin',generate_password_hash('dev')),
+           ('testuser',generate_password_hash('dev'))]
 
   for u in users:
     db.execute(
