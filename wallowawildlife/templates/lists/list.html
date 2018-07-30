@@ -2,15 +2,30 @@
 
 {% block content %}
 <section id="lists">
-  <h1>{{ page_title }}</h1>
+  <h2>{{ page_title }}</h2>
 
-  <a href="{{ url_for('lists.addCreature') }}">Add a Creature</a>
+  <p class="center">
+    <a href="{{ url_for('lists.addCreature') }}">Add a Creature</a>
+  </p>
 
-  <ul>
-  {% for c in creatures %}
-  <li><a href="{{ url_for('lists.showCreature', creature_id=c.id) }}">{{ c.name_common }}</a></li>
-  {% endfor %}
-  </ul>
+  <table>
+    <tr>
+      <th>Common Name</td>
+      <th>Latin Name</td>
+      <th>&nbsp;</td>
+      <th>&nbsp;</td>
+    </tr>
+
+    {% for c in creatures %}
+    <tr>
+      <td><a href="{{ url_for('lists.showCreature', creature_id=c.id) }}">{{ c.name_common }}</a></td>
+      <td><em>{{ c.name_latin }}</em></td>
+      <td><a class="button" href='{{url_for('lists.editCreature', creature_id = c.id) }}'>Edit</a></td>
+      <td><a class="button" href='{{url_for('lists.deleteCreature', creature_id = c.id) }}'>Delete</a></td>
+    </tr>
+    {% endfor %}
+
+  </table>
 
 </section>
 {% endblock %}

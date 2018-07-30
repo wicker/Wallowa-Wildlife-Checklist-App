@@ -67,3 +67,28 @@ section img {
 #auth form {
   text-align: center;
 }
+
+table {
+  margin: 10px auto;
+}
+
+table tr {
+  height: 2em;
+  vertical-align: center;
+}
+
+table th, td {
+  padding: 10px;
+}
+
+table tr:nth-child(odd) td{
+  background-color: #cfcfcf;
+}
+
+table tr:nth-child(even) td{
+  background-color: #fff;
+}
+
+.center {
+  text-align: center;
+}
