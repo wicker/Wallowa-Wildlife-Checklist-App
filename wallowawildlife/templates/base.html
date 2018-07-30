@@ -34,7 +34,11 @@
     <ul>
       <li><a href="{{ url_for('lists.listAll') }}">All</a></li>
     {% for t in types %}
-      <li>{{ t.name }}</li>
+    <li>
+      <a href="{{ url_for('lists.listByType',url_text=t.url_text) }}">
+        {{ t.name }}
+      </a>
+    </li>
     {% endfor %}
     </ul>
   </nav>
