@@ -8,12 +8,12 @@
     <a href="{{ url_for('lists.addCreature') }}">Add a Creature</a>
   </p>
 
-  <table>
+  <table cellpadding="0" cellspacing="0">
     <tr>
-      <th>Common Name</td>
-      <th>Latin Name</td>
-      <th>Edit</td>
-      <th>Delete</td>
+      <th>Common Name</th>
+      <th>Latin Name</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
     </tr>
 
     {% for c in creatures %}

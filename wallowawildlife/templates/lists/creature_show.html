@@ -5,10 +5,12 @@
   <h2>{{ creature.name_common }}</h2>
   <p class="center"></em>{{ creature.name_latin }}</em></p>
 
+  {% if creature.user_id == g.user['id'] %} 
   <p class="center">
   	<a class="button" href="{{ url_for('lists.editCreature', creature_id = creature.id) }}">Edit</a> &nbsp; 
     <a class="button" href="{{ url_for('lists.deleteCreature', creature_id = creature.id) }}">Delete</a>
   </p>
+  {% endif %}
 
   <img class="wildlife" src="{{ creature.photo_url }}">
 

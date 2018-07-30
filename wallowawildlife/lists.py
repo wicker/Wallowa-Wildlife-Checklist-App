@@ -67,7 +67,7 @@ def addCreature():
                 request.form['description'],
                 request.form['photo_url'],
                 request.form['wiki_url'],
-                1,
+                g.user['id'],
                 request.form['type_id'],
                 )
     )
@@ -88,6 +88,7 @@ def showCreature(creature_id):
                          creature=creature)
 
 @bp.route('/wildlife/<int:creature_id>/edit', methods=['GET','POST'])
+@login_required
 def editCreature(creature_id):
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
@@ -127,7 +128,7 @@ def editCreature(creature_id):
     else:
       type_id = creature['type_id']
 
-    user_id = 1
+    user_id = creature['user_id']
 
     db.execute('UPDATE creature SET name_common = ?,'
                'name_latin = ?, description = ?,'
@@ -142,10 +143,14 @@ def editCreature(creature_id):
     flash("Successfully edited " + creature['name_common'])
     return redirect(url_for('lists.listAll'))
 
+  if g.user['id'] is not creature['user_id']:
+    return redirect(url_for('lists.listAll'))
+
   return render_template('/lists/creature_edit.html', types=types,
                          creature=creature)
 
 @bp.route('/wildlife/<int:creature_id>/delete', methods=['GET','POST'])
+@login_required
 def deleteCreature(creature_id):
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
@@ -157,6 +162,9 @@ def deleteCreature(creature_id):
     db.commit()
     flash("Successfully deleted " + creature['name_common'])
     return redirect(url_for('lists.listAll'))
-  else:
-    return render_template('/lists/creature_delete.html', types=types,
+
+  if g.user['id'] is not creature['user_id']:
+    return redirect(url_for('lists.listAll'))
+
+  return render_template('/lists/creature_delete.html', types=types,
                          creature=creature)
