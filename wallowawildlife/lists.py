@@ -52,4 +52,9 @@ def listByType(url_text):
   return render_template('lists/list.html', types=types,
       creatures=creaturesDisplayable, page_title=title)
 
+@bp.route('/wildlife/add')
+def addCreature():
+  db = get_db()
+  types = db.execute('SELECT * FROM creature_type').fetchall()
 
+  return render_template('/lists/creature_add.html', types=types)

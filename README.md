@@ -96,8 +96,8 @@ The `user` table is set up with an admin and a user account.
 |Auth|/register|register()|auth/register.html|
 |Auth|/login|login()|auth/login.html|
 |Auth|/logout|logout()||
-|Lists|/wildlife|listAll()|lists/list_all.html|
-|Lists|/wildlife/?t=mammals|listByType()|lists/list_by_type.html|
+|Lists|/wildlife|listAll()|lists/list.html|
+|Lists|/wildlife/mammals|listByType()|lists/list.html|
 |Lists|/wildlife/add|addCreature()|lists/creature_add.html|
 |Lists|/wildlife/mammals/10|showCreature()|lists/creature_show.html|
 |Lists|/wildlife/mammals/10/edit|editCreature()|lists/creature_edit.html|

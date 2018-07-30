@@ -4,6 +4,8 @@
 <section id="lists">
   <h1>{{ page_title }}</h1>
 
+  <a href="{{ url_for('lists.addCreature') }}">Add a Creature</a>
+
   <ul>
   {% for c in creatures %}
   <li>{{ c.name_common }}</li>
