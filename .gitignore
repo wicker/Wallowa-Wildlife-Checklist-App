@@ -1,5 +1,5 @@
-# Client secret
-client_secret.json
+# Client secrets
+client_secrets.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
