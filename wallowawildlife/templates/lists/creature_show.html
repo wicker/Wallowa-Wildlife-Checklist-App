@@ -13,8 +13,8 @@
   {% endif %}
 
   {% if not creature.photo_url == '' %}
-  <figure>
-    <img class="wildlife" src="{{ creature.photo_url }}"
+  <figure class="wildlife">
+    <img src="{{ creature.photo_url }}"
       alt="{{ creature.photo_attr }}">
     <figcaption>{{ creature.photo_attr }}</figcaption>
   </figure>
