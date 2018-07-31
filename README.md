@@ -75,12 +75,13 @@ The `creature` table is populated by a CSV file called db.csv. The program expec
 
 |Fields|Example|
 |------|-------|
-|Common Name|Rocky Mountain Elk|
-|Latin Name|Cervus canadensis|
-|Type|mammal|
-|Description|One of the largest land mammals, elk range in forest and forest-edge habitats.|
-|Photo URL|https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Rocky_Mountain_Bull_Elk.jpg/1024px-Rocky_Mountain_Bull_Elk.jpg|
-|Wiki URL|https://en.wikipedia.org/wiki/Elk|
+|Common Name|Calcedon Checkerspot|
+|Latin Name|Euphydryas chalcedona|
+|Type|spider_insect|
+|Description|Butterfly found throughout western North America.|
+|Photo URL|https://github.com/wicker/Wallowa-Wildlife-Checklist-App-New/blob/master/wallowawildlife/static/img/iwe.png?raw=true|
+|Photo Attribution|Jenner Hanni CC-BY-SA 2.0|
+|Wiki URL|https://en.wikipedia.org/wiki/Variable_checkerspot|
 
 The `Type` entry must match one of the `url_text` entries in the `creature_type` table above.
 

@@ -1,4 +1,4 @@
-Rocky Mountain Elk,Cervus canadensis,mammal,One of the largest land mammals,https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Rocky_Mountain_Bull_Elk.jpg/1024px-Rocky_Mountain_Bull_Elk.jpg,https://en.wikipedia.org/wiki/Elk,
+Rocky Mountain Elk,Cervus elaphus,mammal,,https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Rocky_Mountain_Bull_Elk.jpg/1024px-Rocky_Mountain_Bull_Elk.jpg,,https://en.wikipedia.org/wiki/Elk
 Mule Deer,Odocoileus hemionus,mammal,,,,
 White-tailed Deer,Odocoileus virginianus,mammal,,,,
 Rocky Mountain Bighorn Sheep,Ovis canadensis,mammal,,,,
@@ -120,3 +120,4 @@ Common Horsetail,Equisetum arvense,wildflower,,,,
 Upland Larkspur,Delphinium nuttallianum,wildflower,,,,
 Bigleaf Lupine,Lupinus polyphyllus,wildflower,,,,
 Small Camas,Camassia quamash,wildflower,,,,
+Calcedon Checkerspot,Euphydryas chalcedona,spider_insect,Butterfly found throughout North America.,https://github.com/wicker/Wallowa-Wildlife-Checklist-App-New/blob/master/wallowawildlife/static/img/iwe.png?raw=true,Jenner Hanni CC-BY-SA 2.0,https://en.wikipedia.org/wiki/Variable_checkerspot|

@@ -20,6 +20,7 @@ CREATE TABLE creature (
   name_latin TEXT NOT NULL,
   description TEXT NOT NULL,
   photo_url TEXT NOT NULL,
+  photo_attr TEXT NOT NULL,
   wiki_url TEXT NOT NULL,
   user_id INTEGER NOT NULL,
   type_id TEXT NOT NULL,
