@@ -16,7 +16,7 @@
       <th>&nbsp;</th>
     </tr>
 
-    {% for c in creatures %}
+    {% for c in creatures | sort(attribute = 'name_common') %}
     <tr>
       <td><a href="{{ url_for('lists.showCreature', creature_id=c.id) }}">{{ c.name_common }}</a></td>
       <td><em>{{ c.name_latin }}</em></td>
