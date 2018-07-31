@@ -5,7 +5,7 @@ This is the entry point to the entire application.
 """
 
 import os
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, flash, redirect, url_for
 
 def create_app(test_config=None):
   """Create an instance of Wallowa Wildlife Checklists"""
@@ -51,6 +51,10 @@ def create_app(test_config=None):
                        'type':c['type_id']} for c in creatures]
 
     return jsonify(json_creatures)
+
+  @app.errorhandler(404)
+  def page_not_found(e):
+    return redirect(url_for('index'))
 
   # register cli db commands
   from . import db
