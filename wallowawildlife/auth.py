@@ -98,7 +98,7 @@ def login():
   session['state'] = state
   flash(session['state'])
 
-  return render_template('auth/login.html',types=types)
+  return render_template('auth/login.html',types=types, glogin=True)
 
 
 @bp.route('/logout')
