@@ -42,11 +42,11 @@ def create_app(test_config=None):
   def wildlifeJSON():
     db = get_db()
     creatures = db.execute('SELECT * FROM creature').fetchall()
-    json_creatures = [{'name_common':c['name_common'],
+    json_creatures = [{'id':c['id'],
+                       'name_common':c['name_common'],
                        'name_latin':c['name_latin'],
-                       'description':c['description'],
-                       'id':c['id'],
                        'photo_url':c['photo_url'],
+                       'photo_attr':c['photo_attr'],
                        'wiki_url':c['wiki_url'],
                        'type':c['type_id']} for c in creatures]
 

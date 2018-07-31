@@ -60,11 +60,11 @@ def addCreature():
 
   if request.method == 'POST':
     db.execute('INSERT INTO creature (name_common, name_latin,'
-               'description, photo_url, wiki_url, user_id, type_id)'
+               'photo_attr, photo_url, wiki_url, user_id, type_id)'
                'VALUES (?,?,?,?,?,?,?)',
                (request.form['name_common'],
                 request.form['name_latin'],
-                request.form['description'],
+                request.form['photo_attr'],
                 request.form['photo_url'],
                 request.form['wiki_url'],
                 g.user['id'],
@@ -108,10 +108,10 @@ def editCreature(creature_id):
     else:
       name_latin = creature['name_latin']
 
-    if request.form['description']:
-      description = request.form['description']
+    if request.form['photo_attr']:
+      photo_attr = request.form['photo_attr']
     else:
-      description = creature['description']
+      photo_attr = creature['photo_attr']
 
     if request.form['photo_url']:
       photo_url = request.form['photo_url']
@@ -131,11 +131,11 @@ def editCreature(creature_id):
     user_id = creature['user_id']
 
     db.execute('UPDATE creature SET name_common = ?,'
-               'name_latin = ?, description = ?,'
+               'name_latin = ?, photo_attr = ?,'
                'photo_url = ?, wiki_url = ?,'
                'user_id = ?, type_id = ?'
                ' WHERE id = ?',
-               (name_common, name_latin, description,
+               (name_common, name_latin, photo_attr,
                 photo_url, wiki_url, user_id, type_id,
                 creature_id)
     )
