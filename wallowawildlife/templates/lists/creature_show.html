@@ -20,7 +20,9 @@
   </figure>
   {% endif %}
 
-  <p class="wikipedia">Find more on <a href="{{ creature.wiki_url }}">Wikipedia</a>...</p>
+  {% if creature.wiki_url %}
+    <p class="wikipedia">Find more on <a href="{{ creature.wiki_url }}">Wikipedia</a>...</p>
+  {% endif %}
 
 </section>
 {% endblock %}

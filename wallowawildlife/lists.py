@@ -84,8 +84,12 @@ def showCreature(creature_id):
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
 
-  return render_template('/lists/creature_show.html', types=types,
-                         creature=creature)
+  if creature:
+    return render_template('/lists/creature_show.html', types=types,
+                           creature=creature)
+  else:
+    flash("This entry does not exist.")
+    return redirect(url_for('lists.listAll'))
 
 @bp.route('/wildlife/<int:creature_id>/edit', methods=['GET','POST'])
 @login_required
