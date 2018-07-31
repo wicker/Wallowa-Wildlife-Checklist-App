@@ -65,14 +65,13 @@ def init_db():
       db.execute('INSERT INTO creature (name_common, \
                                         name_latin,  \
                                         type_id,     \
-                                        description, \
                                         photo_url,   \
                                         photo_attr,    \
                                         wiki_url,    \
                                         user_id)     \
-        VALUES (?,?,?,?,?,?,?,?)',
+        VALUES (?,?,?,?,?,?,?)',
         (line[0], line[1], line[2],
-         line[3], line[4], line[5], line[6], 1)
+         line[3], line[4], line[5], 1)
       )
       db.commit()
 

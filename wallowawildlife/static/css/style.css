@@ -115,5 +115,12 @@ table tr:nth-child(even) td{
 }
 
 .wildlife {
-  width: 50%;
+  max-width: 100%;
+  width: 300px;
+}
+
+.wikipedia {
+  max-width: 300px;
+  text-align: center;
+  margin: 0 auto;
 }

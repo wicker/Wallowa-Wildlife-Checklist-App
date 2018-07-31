@@ -18,7 +18,6 @@ CREATE TABLE creature (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name_common TEXT NOT NULL,
   name_latin TEXT NOT NULL,
-  description TEXT NOT NULL,
   photo_url TEXT NOT NULL,
   photo_attr TEXT NOT NULL,
   wiki_url TEXT NOT NULL,
