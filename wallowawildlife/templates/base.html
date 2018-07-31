@@ -45,11 +45,11 @@
     </ul>
   </nav>
 
-  <section id="messages">
-    {% for message in get_flashed_messages() %}
-      <div class="flash">{{ message }}</div>
-    {% endfor %}
+  {% for message in get_flashed_messages() %}
+  <section id="flash-container">
+    <p class="flash">{{ message }}</p>
   </section>
+  {% endfor %}
 
   {% block content %}{% endblock %}
 

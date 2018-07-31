@@ -95,6 +95,10 @@ def editCreature(creature_id):
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
 
+  if g.user['id'] is not creature['user_id']:
+    flash("You may only edit an entry you own.")
+    return redirect(url_for('lists.listAll'))
+
   if request.method == 'POST':
 
     # only use new values if they were submitted
@@ -143,9 +147,6 @@ def editCreature(creature_id):
     flash("Successfully edited " + creature['name_common'])
     return redirect(url_for('lists.listAll'))
 
-  if g.user['id'] is not creature['user_id']:
-    return redirect(url_for('lists.listAll'))
-
   return render_template('/lists/creature_edit.html', types=types,
                          creature=creature)
 
@@ -157,13 +158,14 @@ def deleteCreature(creature_id):
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
 
+  if g.user['id'] is not creature['user_id']:
+    flash("You may only delete an entry you own.")
+    return redirect(url_for('lists.listAll'))
+
   if request.method == 'POST':
     db.execute('DELETE FROM creature where id = ?', (creature_id,))
     db.commit()
     flash("Successfully deleted " + creature['name_common'])
-    return redirect(url_for('lists.listAll'))
-
-  if g.user['id'] is not creature['user_id']:
     return redirect(url_for('lists.listAll'))
 
   return render_template('/lists/creature_delete.html', types=types,
