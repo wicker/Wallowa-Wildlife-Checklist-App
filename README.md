@@ -51,6 +51,12 @@ coverage report
 coverage html  # open htmlcov/index.html in a browser
 ```
 
+# Screenshots
+
+![Logged out](docs/screenshot-loggedout.png)
+
+![Logged in](docs/screenshot-loggedin.png)
+
 # Docs and Design Notes
 
 ## Database Schema
