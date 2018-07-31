@@ -8,14 +8,11 @@ These functions were copied over verbatim from the flaskr tutorial
 before being modified for this application.
 """
 
-import functools
-
+import functools, random, string
 from flask import (
   Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from wallowawildlife.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -95,6 +92,11 @@ def login():
       return redirect(url_for('index'))
 
     flash(error)
+
+  # create and store access token in the session
+  state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
+  session['state'] = state
+  flash(session['state'])
 
   return render_template('auth/login.html',types=types)
 
