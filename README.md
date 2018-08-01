@@ -37,7 +37,7 @@ flask run
 
 Open [http://localhost:5000/](http://localhost:5000/) in a browser. 
 
-Flask may suggest opening `127.0.0.1:5000` but that will cause problems with the Google authentication, so it's best to use the localhost-based link above. 
+**Note:** Flask may suggest opening `127.0.0.1:5000` but that will cause problems with the Google authentication, so it's best to use the localhost-based link above. 
 
 ## Test
 
@@ -53,12 +53,6 @@ coverage run -m pytest
 coverage report
 coverage html  # open htmlcov/index.html in a browser
 ```
-
-# Screenshots
-
-![Logged out](docs/screenshot-loggedout.png)
-
-![Logged in](docs/screenshot-loggedin.png)
 
 # Docs and Design Notes
 
@@ -112,4 +106,17 @@ The `user` table is set up to store hashed Google Plus IDs.
 |Lists|/wildlife/mammals/10|showCreature()|lists/creature_show.html|
 |Lists|/wildlife/mammals/10/edit|editCreature()|lists/creature_edit.html|
 |Lists|/wildlife/mammals/10/delete|deleteCreature()|lists/creature_delete.html|
+
+# Screenshots
+
+![Front page, logged out](docs/screenshot-frontpage-loggedout.png)
+
+![List view, logged out](docs/screenshot-list-loggedout.png)
+
+![List view, logged in](docs/screenshot-list-loggedin.png)
+
+![Add form, login required](docs/screenshot-form-loggedin.png)
+
+![Item view, logged out](docs/screenshot-item-loggedout.png)
+
 
