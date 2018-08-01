@@ -2,15 +2,20 @@
 
 {% block content %}
 <section id="lists">
-  <h1>Delete {{ creature.name_common }}</h1>
+  <h2>Delete {{ creature.name_common }}</h2>
 
-  <form action="{{ url_for('lists.deleteCreature', creature_id = creature.id)}}" method='POST'>
-    <input type="submit", value="Confirm delete">
+  <form action="{{ url_for('lists.deleteCreature', creature_id = creature.id)}}" 
+    method="POST" class="center">
+    <div class="submit-container">
+      <input class="submit" type="submit", value="Delete">
+       <a href='{{url_for('lists.showCreature', creature_id = creature.id)}}'>
+         <p class="submit cancel">
+           Cancel
+         </p>
+       </a>
+    </div>
   </form>
 
-  <a class="button" href="{{ url_for('lists.showCreature', creature_id = creature.id) }}">
-    Cancel
-  </a>
 
 </section>
 {% endblock %}
