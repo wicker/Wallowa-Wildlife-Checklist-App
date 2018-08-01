@@ -19,13 +19,18 @@ header {
   align-items: center;
   background-color: #242b32;
   color: #fff;
-  clear: both;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, auto);
-  grid-gap: 10px;
-  justify-items: center;
-  padding: 20px;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 40px 10px;
+}
+
+@media (max-width: 767px) {
+
+  header {
+    flex-direction: column;
+  }
 }
 
 header a, 
@@ -38,23 +43,13 @@ header a:hover {
   color: #cfcfcf;
 }
 
-header h1 {
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-}
-
 header img {
-  display: block;
-  margin: 0 auto;
   width: 100px;
 }
 
-header .login {
-  display: block;
-  margin: 0 auto;
-  text-align:center;
-  padding: 0;
+header h1 {
+  text-align: center;
+  padding: 0 20px;
 }
 
 nav {
@@ -77,10 +72,6 @@ nav a, nav a:visited {
   color: #fff;
   display: inline-block;
   padding: 20px;
-}
-
-ul {
-  list-style: none;
 }
 
 section {
