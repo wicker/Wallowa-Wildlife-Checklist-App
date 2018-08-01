@@ -135,6 +135,7 @@ table tr:nth-child(even) td{
   border: 1px solid #cfcfcf;
   min-height: 100px;
   width: 90%;
+  margin: 0 auto;
 }
 
 .wildlife figcaption {
