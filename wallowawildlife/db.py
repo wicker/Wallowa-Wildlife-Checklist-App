@@ -41,7 +41,7 @@ def init_db():
   with current_app.open_resource('schema.sql') as f:
     db.executescript(f.read().decode('utf-8'))
 
-  # manually add list of creature types
+  # Manually add list of creature types.
   types = [('Mammals','mammal'),
            ('Birds','bird'),
            ('Reptiles & Amphibians','reptile_amphibian'),
@@ -55,13 +55,13 @@ def init_db():
       (t[0],t[1]))
     db.commit()
 
-  # load the list of creatures from the CSV file
+  # Load the list of creatures from the CSV file.
   with open('db.csv', 'r') as f:
     for line in f:
       line = line.split(',')
 
-      # load this into the right table
-      # user id of '1' is 'admin' user
+      # Load this into the creature table.
+      # The user id of '1' is the administrative user.
       db.execute('INSERT INTO creature (name_common, \
                                         name_latin,  \
                                         type_id,     \
@@ -75,7 +75,7 @@ def init_db():
       )
       db.commit()
 
-  # manually add the admin user
+  # Manually add the admin user.
   db.execute(
     'INSERT INTO user (gplus_id) VALUES (?)',
     (generate_password_hash('adminpass'),)

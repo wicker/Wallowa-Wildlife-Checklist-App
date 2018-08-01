@@ -21,30 +21,33 @@ bp = Blueprint('lists', __name__)
 
 @bp.route('/wildlife')
 def listAll():
+  """List all creatures in all categories"""
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
   creatures = db.execute('SELECT * FROM creature').fetchall()
   return render_template('lists/list.html', types=types,
       creatures=creatures, page_title='All')
 
+
 @bp.route('/wildlife/<url_text>')
 def listByType(url_text):
+  """List only the creatures of the requested category"""
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
   creatures = db.execute('SELECT * FROM creature').fetchall()
   creaturesDisplayable = []
 
   title = ''
-  # check to see if URL is looking for a valid creature type
+  # Check to see if URL is looking for a valid creature type.
   for t in types:
     if url_text == t['url_text']:
       title = t['name']
 
-  # if there's no title, the URL doesn't match possible creature types
+  # If there's no title, the URL doesn't match possible creature types.
   if title == '':
     return redirect(url_for('index'))
 
-  # otherwise, only show the creatures of the desired type
+  # Otherwise, only show the creatures of the desired type.
   for c in creatures:
     if (c['type_id'] == url_text):
       creaturesDisplayable.append(c)
@@ -52,12 +55,15 @@ def listByType(url_text):
   return render_template('lists/list.html', types=types,
       creatures=creaturesDisplayable, page_title=title)
 
+
 @bp.route('/wildlife/add', methods=['GET','POST'])
 @login_required
 def addCreature():
+  """Render and handle the form to add an creature"""
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
 
+  # If the form has been submitted, add the item to the table.
   if request.method == 'POST':
     db.execute('INSERT INTO creature (name_common, name_latin,'
                'photo_attr, photo_url, wiki_url, user_id, type_id)'
@@ -75,10 +81,13 @@ def addCreature():
     flash("Successfully added " + request.form['name_common'])
     return redirect(url_for('lists.listAll'))
 
+  # Otherwise, render the form.
   return render_template('/lists/creature_add.html', types=types)
+
 
 @bp.route('/wildlife/<int:creature_id>/')
 def showCreature(creature_id):
+  """Show the requested creature information"""
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
@@ -91,21 +100,26 @@ def showCreature(creature_id):
     flash("This entry does not exist.")
     return redirect(url_for('lists.listAll'))
 
+
 @bp.route('/wildlife/<int:creature_id>/edit', methods=['GET','POST'])
 @login_required
 def editCreature(creature_id):
+  """Render and handle the form to edit a creature"""
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
 
+  # Only the owner of a creature may edit its entry.
   if g.user_id is not creature['user_id']:
     flash("You may only edit an entry you own.")
     return redirect(url_for('lists.listAll'))
 
+  # If the form has been submitted, edit the entry in its table.
   if request.method == 'POST':
 
-    # only use new values if they were submitted
+    # Only use new values if they were submitted.
+    # Otherwise, use the previous values.
     if request.form['name_common']:
       name_common = request.form['name_common']
     else:
@@ -136,6 +150,7 @@ def editCreature(creature_id):
     else:
       type_id = creature['type_id']
 
+    # Never allow for updating the owner of a creature.
     user_id = creature['user_id']
 
     db.execute('UPDATE creature SET name_common = ?,'
@@ -151,26 +166,32 @@ def editCreature(creature_id):
     flash("Successfully edited " + creature['name_common'])
     return redirect(url_for('lists.listAll'))
 
+  # Otherwise, render the form.
   return render_template('/lists/creature_edit.html', types=types,
                          creature=creature)
+
 
 @bp.route('/wildlife/<int:creature_id>/delete', methods=['GET','POST'])
 @login_required
 def deleteCreature(creature_id):
+  """Render and handle the form to delete a creature"""
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
 
+  # Only the owner of a creature may edit its entry.
   if g.user_id is not creature['user_id']:
     flash("You may only delete an entry you own.")
     return redirect(url_for('lists.listAll'))
 
+  # If the form has been submitted, delete the entry from its table.
   if request.method == 'POST':
     db.execute('DELETE FROM creature where id = ?', (creature_id,))
     db.commit()
     flash("Successfully deleted " + creature['name_common'])
     return redirect(url_for('lists.listAll'))
 
+  # Otherwise, render the form.
   return render_template('/lists/creature_delete.html', types=types,
                          creature=creature)

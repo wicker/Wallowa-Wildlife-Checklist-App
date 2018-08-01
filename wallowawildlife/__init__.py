@@ -11,38 +11,43 @@ def create_app(test_config=None):
   """Create an instance of Wallowa Wildlife Checklists"""
   app = Flask(__name__, instance_relative_config=True)
   app.config.from_mapping(
-    # this secret will be overriden with the instance config
+    # This secret will be overriden with the instance config.
     SECRET_KEY='dev',
-    # store the database in the instance folder
+    # Store the database in the instance folder.
     DATABASE=os.path.join(app.instance_path, 'wallowawildlife.sqlite'),
-    # read in the client_id for google login
+    # Read in the client_id for google login.
     CLIENT_ID = json.loads(
       open('wallowawildlife/client_secrets.json', 'r').read())['web']['client_id']
   )
 
   if test_config is None:
-    # just load the instance config
+    # Load the instance config.
     app.config.from_pyfile('config.py', silent=True)
   else:
-    # otherwise, load the test config
+    # Otherwise, load the test config.
     app.config.update(test_config)
 
-  # make the instance folder if it doesn't exist
+  # Make the instance folder if it doesn't exist.
   try:
     os.makedirs(app.instance_path)
   except OSError:
     pass
 
+  # Make the database available.
   from wallowawildlife.db import get_db
+
 
   @app.route('/')
   def index():
+    """Handle the index route"""
     db = get_db()
     types = db.execute('SELECT * FROM creature_type').fetchall()
     return render_template('front_page.html', types=types)
 
+
   @app.route('/wildlife/JSON')
   def wildlifeJSON():
+    """Create JSON endpoint"""
     db = get_db()
     creatures = db.execute('SELECT * FROM creature').fetchall()
     json_creatures = [{'id':c['id'],
@@ -55,15 +60,18 @@ def create_app(test_config=None):
 
     return jsonify(json_creatures)
 
+
   @app.errorhandler(404)
   def page_not_found(e):
+    """Redirect from all unhandled URLs to the index route"""
     return redirect(url_for('index'))
 
-  # register cli db commands
+
+  # Register cli db commands.
   from . import db
   db.init_app(app)
 
-  # apply blueprints
+  # Apply blueprints.
   from . import auth
   app.register_blueprint(auth.bp)
 

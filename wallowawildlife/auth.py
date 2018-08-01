@@ -21,12 +21,15 @@ from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-# use the unhashed gplus_id of the current user in session
-# to find the user's id in the 'user' table
-# so the lists templates and functions can determine
-# authorization for performing CRUD operations
 @bp.before_app_request
 def load_logged_in_user():
+  """Check current session user when loading every page
+
+  Use the unhashed gplus_id of the current user in session
+  to find the user's id in the 'user' table so the lists
+  templates and functions can determine authorization for
+  performing CRUD operations.
+  """
   user_id = session.get('user_id')
   if user_id is None:
     g.user_id = None
@@ -39,8 +42,8 @@ def load_logged_in_user():
         user_found_flag = True
         redirect(url_for('lists.listAll'))
 
-    # otherwise, something went wrong with the session
-    # close it and redirect them to the login page
+    # If something went wrong with the session, close the
+    # session and redirect the user to the login page.
     if not user_found_flag:
       session.clear()
       g.user_id = None
@@ -52,26 +55,26 @@ def login():
   db = get_db()
   types = db.execute('SELECT * FROM creature_type').fetchall()
 
-  # create and store access token in the session
+  # Create and store access token in the session.
   if request.method == 'GET':
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
     session['state'] = state
     return render_template('auth/login.html',types=types,
                            glogin=True, STATE=state)
 
-  # the user has logged in with google
+  # The user has logged in with google.
   elif request.method == 'POST':
 
-    # Validate state token
+    # Validate state token.
     if request.args.get('state') != session['state']:
         response = make_response(json.dumps('Invalid state parameter.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
 
-    # Obtain authorization code
+    # Obtain authorization code.
     code = request.data
     try:
-        # Upgrade the authorization code into a credentials object
+        # Upgrade the authorization code into a credentials object.
         oauth_flow = flow_from_clientsecrets(app.root_path+'/client_secrets.json', scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
@@ -122,8 +125,7 @@ def login():
     session['access_token'] = credentials.access_token
     session['user_id'] = gplus_id
 
-    # check if the user exists in the user table
-    # if not, add the entry
+    # If the user does not exist in the user table, add them.
     users = db.execute('SELECT * FROM user').fetchall()
     user_found_flag = False
     for u in users:
