@@ -42,17 +42,17 @@ def init_db():
     db.executescript(f.read().decode('utf-8'))
 
   # Manually add list of creature types.
-  types = [('Mammals','mammal'),
-           ('Birds','bird'),
-           ('Reptiles & Amphibians','reptile_amphibian'),
-           ('Trees & Shrubs','tree_shrub'),
-           ('Fishes','fish'),
-           ('Wildflowers','wildflower'),
-           ('Spiders & Insects','spider_insect')]
+  types = [('Mammals', 'mammal'),
+           ('Birds', 'bird'),
+           ('Reptiles & Amphibians', 'reptile_amphibian'),
+           ('Trees & Shrubs', 'tree_shrub'),
+           ('Fishes', 'fish'),
+           ('Wildflowers', 'wildflower'),
+           ('Spiders & Insects', 'spider_insect')]
   for t in types:
     db.execute(
-      'INSERT INTO creature_type (name, url_text) VALUES (?,?)',
-      (t[0],t[1]))
+      'INSERT INTO creature_type (name, url_text) VALUES (?, ?)',
+      (t[0], t[1]))
     db.commit()
 
   # Load the list of creatures from the CSV file.
@@ -66,12 +66,12 @@ def init_db():
                                         name_latin,  \
                                         type_id,     \
                                         photo_url,   \
-                                        photo_attr,    \
+                                        photo_attr,  \
                                         wiki_url,    \
                                         user_id)     \
-        VALUES (?,?,?,?,?,?,?)',
-        (line[0], line[1], line[2],
-         line[3], line[4], line[5], 1)
+                  VALUES (?,?,?,?,?,?,?)',           \
+                  (line[0], line[1], line[2],        \
+                  line[3], line[4], line[5], 1)      \
       )
       db.commit()
 

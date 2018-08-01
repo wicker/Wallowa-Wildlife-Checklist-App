@@ -25,4 +25,4 @@ indent-after-paren=2
 notes=FIXME,XXX,TODO
 
 # Good variable names which should always be accepted, separated by a comma
-good-names=db,bp,e,f,i,j,k,ex,Run,_,pk,x,y
+good-names=db,bp,e,f,i,h,j,k,ex,Run,_,pk,t,u,x,y

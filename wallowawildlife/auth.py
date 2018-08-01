@@ -8,14 +8,17 @@ These functions were copied over verbatim from the flaskr tutorial
 before being modified for this application.
 """
 
-import functools, random, string, httplib2, json, requests
+import functools
+import random
+import string
+import json
+import httplib2
 from flask import (
   Blueprint, flash, g, redirect, render_template, request, session, url_for,
   current_app as app
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from wallowawildlife.db import get_db
-
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -57,9 +60,10 @@ def login():
 
   # Create and store access token in the session.
   if request.method == 'GET':
-    state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
+    state = ''.join(random.choice(string.ascii_uppercase \
+                    + string.digits) for x in range(32))
     session['state'] = state
-    return render_template('auth/login.html',types=types,
+    return render_template('auth/login.html', types=types,
                            glogin=True, STATE=state)
 
   # The user has logged in with google.
@@ -67,22 +71,23 @@ def login():
 
     # Validate state token.
     if request.args.get('state') != session['state']:
-        response = make_response(json.dumps('Invalid state parameter.'), 401)
-        response.headers['Content-Type'] = 'application/json'
-        return response
+      response = make_response(json.dumps('Invalid state parameter.'), 401)
+      response.headers['Content-Type'] = 'application/json'
+      return response
 
     # Obtain authorization code.
     code = request.data
     try:
-        # Upgrade the authorization code into a credentials object.
-        oauth_flow = flow_from_clientsecrets(app.root_path+'/client_secrets.json', scope='')
-        oauth_flow.redirect_uri = 'postmessage'
-        credentials = oauth_flow.step2_exchange(code)
+      # Upgrade the authorization code into a credentials object.
+      oauth_flow = flow_from_clientsecrets(app.root_path \
+                   + '/client_secrets.json', scope='')
+      oauth_flow.redirect_uri = 'postmessage'
+      credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
-        response = make_response(
-            json.dumps('Failed to upgrade the authorization code.'), 401)
-        response.headers['Content-Type'] = 'application/json'
-        return response
+      response = make_response(
+        json.dumps('Failed to upgrade the authorization code.'), 401)
+      response.headers['Content-Type'] = 'application/json'
+      return response
 
     # Check that the access token is valid.
     access_token = credentials.access_token
@@ -93,33 +98,33 @@ def login():
 
     # If there was an error in the access token info, abort.
     if result.get('error') is not None:
-        response = make_response(json.dumps(result.get('error')), 500)
-        response.headers['Content-Type'] = 'application/json'
-        return response
+      response = make_response(json.dumps(result.get('error')), 500)
+      response.headers['Content-Type'] = 'application/json'
+      return response
 
     # Verify that the access token is used for the intended user.
     gplus_id = credentials.id_token['sub']
     if result['user_id'] != gplus_id:
-        response = make_response(
-            json.dumps("Token's user ID doesn't match given user ID."), 401)
-        response.headers['Content-Type'] = 'application/json'
-        return response
+      response = make_response(
+        json.dumps("Token's user ID doesn't match given user ID."), 401)
+      response.headers['Content-Type'] = 'application/json'
+      return response
 
     # Verify that the access token is valid for this app.
     if result['issued_to'] != app.config['CLIENT_ID']:
-        response = make_response(
-            json.dumps("Token's client ID does not match app's."), 401)
-        print("Token's client ID does not match app's.")
-        response.headers['Content-Type'] = 'application/json'
-        return response
+      response = make_response(
+        json.dumps("Token's client ID does not match app's."), 401)
+      response.headers['Content-Type'] = 'application/json'
+      return response
 
     stored_access_token = session.get('access_token')
     stored_gplus_id = session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),
-                                 200)
-        response.headers['Content-Type'] = 'application/json'
-        return response
+      response = make_response(
+        json.dumps('Current user is already connected.'), 200
+      )
+      response.headers['Content-Type'] = 'application/json'
+      return response
 
     # Store the access token in the session for later use.
     session['access_token'] = credentials.access_token
@@ -148,9 +153,6 @@ def login():
 def logout():
   """Handle user logging out"""
 
-  db = get_db()
-  types = db.execute('SELECT * FROM creature_type').fetchall()
-
   session.clear()
   flash("You have logged out.")
   return redirect(url_for('lists.listAll'))
@@ -160,6 +162,7 @@ def login_required(view):
   """Redirect to the login screen"""
   @functools.wraps(view)
   def wrapped_view(**kwargs):
+    """Define the wrapped view to check if user is logged in"""
     if g.user_id is None:
       return redirect(url_for('auth.login'))
 

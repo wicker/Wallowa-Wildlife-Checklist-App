@@ -4,7 +4,8 @@
 This is the entry point to the entire application.
 """
 
-import os, json
+import os
+import json
 from flask import Flask, render_template, jsonify, flash, redirect, url_for
 
 def create_app(test_config=None):
@@ -16,8 +17,9 @@ def create_app(test_config=None):
     # Store the database in the instance folder.
     DATABASE=os.path.join(app.instance_path, 'wallowawildlife.sqlite'),
     # Read in the client_id for google login.
-    CLIENT_ID = json.loads(
-      open('wallowawildlife/client_secrets.json', 'r').read())['web']['client_id']
+    CLIENT_ID=json.loads(
+      open('wallowawildlife/client_secrets.json', 'r')
+      .read())['web']['client_id']
   )
 
   if test_config is None:
