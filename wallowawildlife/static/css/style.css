@@ -2,7 +2,7 @@ body {
   background: #fff; 
   font-family: sans-serif; 
   margin: 0 auto;
-  padding: 0;
+  padding: 0 0 40px 0;
 }
 
 a, a:visited {
@@ -27,7 +27,6 @@ header {
 }
 
 @media (max-width: 767px) {
-
   header {
     flex-direction: column;
   }
@@ -96,7 +95,7 @@ section img {
 }
 
 table {
-  margin: 10px auto 60px;
+  margin: 10px auto;
 }
 
 table tr {
@@ -120,6 +119,10 @@ table tr:nth-child(even) td{
 
 .center {
   text-align: center;
+}
+
+.padded {
+  padding: 20px;
 }
 
 .wildlife {
@@ -155,7 +158,8 @@ section #flash-container {
   border: 1px solid #377ba8;
   border-radius: 20px;
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 80%;
+  width: 400px;
   padding: 20px;
   text-align: center;
 }
@@ -170,12 +174,14 @@ input, select, .submit {
   border: 1px solid #377ba8;
   border-radius: 10px;
   margin: 10px;
+  max-width: 80%;
   padding: 10px;
-  width: 300px;
+  width: 320px;
 }
 
 select {
-  width: 320px;
+  max-width: 86%;
+  width: 340px;
 }
 
 .submit-container {

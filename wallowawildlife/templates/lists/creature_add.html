@@ -2,44 +2,47 @@
 
 {% block content %}
 <section id="lists">
-  <h1>Add a new plant or animal</h1>
+  <h2>Add a new plant or animal</h2>
 
-  <p>It will be visible to everyone but you will own and be the only one able to edit or delete this creature.</p>
+  <p class="center padded">
+    This creature will be visible to all users but you will own 
+    and be the only one able to edit or delete it.
+  </p>
 
-	<form action="{{ url_for('lists.addCreature')}}" method='POST'>
-		<p>Common Name: <br />
-		  <input type="text" size="30" name="name_common" placeholder="Common Name"> 
-		</p>
+	<form action="{{ url_for('lists.addCreature')}}" 
+    method="POST" class="center">
+
+    <h4>Common Name</h4>
+    <input type="text" size="30" name="name_common" placeholder="Common Name"> 
 		
-		<p>Latin Name: <br />
-		  <input type="text" size="30" name="name_latin" placeholder="Latin Name"> 
-		</p>
+    <h4>Latin Name</h4>
+    <input type="text" size="30" name="name_latin" placeholder="Latin Name"> 
 
-		<p>Photo Attribution: <br />
-		  <input type="textbox" size="30" name="photo_attr" placeholder="Example: Jenner Hanni (CC-BY-SA 2.0)"> 
-		</p>
+    <h4>Photo Attribution</h4>
+    <input type="textbox" size="30" name="photo_attr" placeholder="Example: Jenner Hanni (CC-BY-SA 2.0)"> 
 
-		<p>Photo URL: <br />
-		  <input type="text" size="30" name="photo_url" placeholder="http://example.org/example.jpg"> 
-		</p>
+    <h4>Photo URL</h4>
+    <input type="text" size="30" name="photo_url" placeholder="http://example.org/example.jpg"> 
 
-		<p>Wikipedia URL: <br />
-		  <input type="text" size="30" name="wiki_url" placeholder="https://en.wikipedia.org/wiki/example"> 
-		</p>
+    <h4>Wikipedia URL</h4>
+    <input type="text" size="30" name="wiki_url" placeholder="https://en.wikipedia.org/wiki/example"> 
 
-		<p>Type: <br />
-      <select name="type_id">
-        {% for t in types %}
-        <option value="{{ t.url_text }}">{{ t.name }}</option>
-        {% endfor %}
-		</p>
+    <h4>Type</h4>
+    <select name="type_id">
+      {% for t in types %}
+      <option value="{{ t.url_text }}">{{ t.name }}</option>
+      {% endfor %}
+    </select>
 
-    <p>
-		  <input type="submit", value="Add">
-    </p>
+    <div class="submit-container">
+      <input class="submit" type="submit", value="Submit">
+       <a href='{{url_for('lists.listAll')}}'>
+         <p class="submit cancel">
+           Cancel
+         </p>
+       </a>
+    </div>
 	</form>
-
-	<a href= '{{url_for('lists.listAll')}}'>Cancel</a>
 
 </section>
 {% endblock %}
