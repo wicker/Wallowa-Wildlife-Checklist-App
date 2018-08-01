@@ -95,7 +95,7 @@ The `Type` entry must match one of the `url_text` entries in the `creature_type`
 
 All creatures initialized by the db are owned by the admin user with id `1` and may not be edited or deleted by non-admin users.
 
-The `user` table is set up with an admin and a user account.
+The `user` table is set up to store hashed Google Plus IDs. 
 
 ## Blueprints, Routes, and Templates
 

@@ -4,8 +4,7 @@ DROP TABLE IF EXISTS creature;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+  gplus_id TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE creature_type (

@@ -149,3 +149,9 @@ section #flash-container {
   padding: 20px;
   text-align: center;
 }
+
+#signinButton {
+  margin: 0 auto;
+  text-align: center;
+}
+

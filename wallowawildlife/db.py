@@ -75,17 +75,12 @@ def init_db():
       )
       db.commit()
 
-  # manually add the list of users
-  # TODO: make actual passwords
-  users = [('admin',generate_password_hash('dev')),
-           ('testuser',generate_password_hash('dev'))]
-
-  for u in users:
-    db.execute(
-      'INSERT INTO user (name, password) VALUES (?,?)',
-      (u[0],u[1])
-    )
-    db.commit()
+  # manually add the admin user
+  db.execute(
+    'INSERT INTO user (gplus_id) VALUES (?)',
+    (generate_password_hash('adminpass'),)
+  )
+  db.commit()
 
 
 @click.command('initdb')

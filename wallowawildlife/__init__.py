@@ -12,7 +12,7 @@ def create_app(test_config=None):
   app = Flask(__name__, instance_relative_config=True)
   app.config.from_mapping(
     # this secret will be overriden with the instance config
-    SECRET_KEY='test',
+    SECRET_KEY='dev',
     # store the database in the instance folder
     DATABASE=os.path.join(app.instance_path, 'wallowawildlife.sqlite'),
     # read in the client_id for google login

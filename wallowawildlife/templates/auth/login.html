@@ -2,27 +2,20 @@
 
 {% block content %}
 <section id="auth">
-  <h2>Login</h2>
-  <form method="post">
-    <label for="name">Username</label>
-    <input name="name" id="name" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="Log In">
-  </form>
-</section>
+  <div id="login-result"></div>
 
-<div id="signinButton">
-  <span class="g-signin"
-    data-scope="openid email"
-    data-clientid="1085124983704-9mth9hn4jg3mv512mpsq9bbmfrf4rmq8.apps.googleusercontent.com"
-    data-redirecturi="postmessage"
-    data-accesstype="offline"
-    data-cookiepolicy="single_host_origin"
-    data-callback="signInCallback"
-    data-approvalprompt="force">
-  </span>
-</div>
+  <div id="signinButton">
+    <span class="g-signin"
+      data-scope="openid email"
+      data-clientid="1085124983704-9mth9hn4jg3mv512mpsq9bbmfrf4rmq8.apps.googleusercontent.com"
+      data-redirecturi="postmessage"
+      data-accesstype="offline"
+      data-cookiepolicy="single_host_origin"
+      data-callback="signInCallback"
+      data-approvalprompt="force">
+    </span>
+  </div>
+</section>
 
 <script>
 function signInCallback(authResult) {
@@ -42,10 +35,11 @@ function signInCallback(authResult) {
       success: function(result) {
         // Handle or verify the server response if necessary.
         if (result) {
-          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...');
+          $('#login-result').attr('class', 'flash')
+                     .html('Login Successful!</br>Redirecting...');
          setTimeout(function() {
           window.location.href = "/wildlife";
-         }, 3000);
+         }, 1000);
           
       } else if (authResult['error']) {
     console.log('There was an error: ' + authResult['error']);

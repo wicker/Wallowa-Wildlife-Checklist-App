@@ -67,7 +67,7 @@ def addCreature():
                 request.form['photo_attr'],
                 request.form['photo_url'],
                 request.form['wiki_url'],
-                g.user['id'],
+                g.user_id,
                 request.form['type_id'],
                 )
     )
@@ -99,7 +99,7 @@ def editCreature(creature_id):
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
 
-  if g.user['id'] is not creature['user_id']:
+  if g.user_id is not creature['user_id']:
     flash("You may only edit an entry you own.")
     return redirect(url_for('lists.listAll'))
 
@@ -162,7 +162,7 @@ def deleteCreature(creature_id):
   creature = db.execute('SELECT * FROM creature WHERE id = ?',
                          (creature_id,)).fetchone()
 
-  if g.user['id'] is not creature['user_id']:
+  if g.user_id is not creature['user_id']:
     flash("You may only delete an entry you own.")
     return redirect(url_for('lists.listAll'))
 
