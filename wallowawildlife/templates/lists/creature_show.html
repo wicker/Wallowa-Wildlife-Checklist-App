@@ -3,7 +3,7 @@
 {% block content %}
 <section id="lists">
   <h2>{{ creature.name_common }}</h2>
-  <p class="center"></em>{{ creature.name_latin }}</em></p>
+  <p class="center"><em>{{ creature.name_latin }}</em></p>
 
   {% if creature.user_id == g.user_id %} 
   <p class="center">
@@ -15,13 +15,13 @@
   {% if not creature.photo_url == '' %}
   <figure class="wildlife">
     <img src="{{ creature.photo_url }}"
-      alt="{{ creature.photo_attr }}">
+      alt="Photo of {{ creature.name_common }}">
     <figcaption>{{ creature.photo_attr }}</figcaption>
   </figure>
   {% endif %}
 
   {% if creature.wiki_url %}
-    <p class="wikipedia">Find more on <a href="{{ creature.wiki_url }}">Wikipedia</a>...</p>
+    <p class="wikipedia">Find more on <a href="{{ creature.wiki_url }}">Wikipedia</a></p>
   {% endif %}
 
 </section>

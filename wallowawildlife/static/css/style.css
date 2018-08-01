@@ -121,6 +121,8 @@ table tr:nth-child(even) td{
 }
 
 .wildlife img {
+  border: 1px solid #cfcfcf;
+  min-height: 100px;
   width: 100%;
 }
 
