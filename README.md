@@ -39,21 +39,6 @@ Open [http://localhost:5000/](http://localhost:5000/) in a browser.
 
 **Note:** Flask may suggest opening `127.0.0.1:5000` but that will cause problems with the Google authentication, so it's best to use the localhost-based link above. 
 
-## Test
-
-```
-pip install '.[test]'
-pytest
-```
-
-Run with a coverage report.
-
-```
-coverage run -m pytest
-coverage report
-coverage html  # open htmlcov/index.html in a browser
-```
-
 # Docs and Design Notes
 
 ## Database Schema
