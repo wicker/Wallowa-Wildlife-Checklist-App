@@ -6,10 +6,11 @@ The app is architected as an application factory using blueprints and test cover
 
 ## Install
 
-Clone the git repository.
+Clone the git repository and change to the directory.
 
 ```
-https://github.com/wicker/Wallowa-Wildlife-Checklist-App.git
+git clone https://github.com/wicker/Wallowa-Wildlife-Checklist-App.git
+cd Wallowa-Wildlife-Checklist-App
 ```
 
 Create the Python [virtual environment](https://virtualenvwrapper.readthedocs.io/en/latest/).

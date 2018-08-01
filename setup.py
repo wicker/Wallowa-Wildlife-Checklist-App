@@ -19,6 +19,9 @@ setup(
     zip_safe=False,
     install_requires=[
         'flask',
+        'httplib2',
+        'requests',
+        'oauth2client'
     ],
     extras_require={
         'test': [
