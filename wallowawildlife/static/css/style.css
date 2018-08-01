@@ -21,9 +21,8 @@ header {
   color: #fff;
   clear: both;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, auto);
   grid-gap: 10px;
-  height: 150px;
   justify-items: center;
   padding: 20px;
   text-align: center;
@@ -39,29 +38,45 @@ header a:hover {
   color: #cfcfcf;
 }
 
+header h1 {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+
 header img {
   display: block;
   margin: 0 auto;
-  padding-right: 40px;
   width: 100px;
+}
+
+header .login {
+  display: block;
+  margin: 0 auto;
+  text-align:center;
+  padding: 0;
 }
 
 nav {
   background-color: #44515e;
   list-style: none;
   margin: 0 0 40px 0;
-  padding: 20px 0;
+  padding: 2px;
   text-align: center;
+}
+
+nav ul {
+  padding: 0;
 }
 
 nav li {
   display: inline;
-  padding: 10px 20px;
 }
 
 nav a, nav a:visited {
   color: #fff;
   display: inline-block;
+  padding: 20px;
 }
 
 ul {
@@ -79,8 +94,10 @@ section h2 {
 
 section img {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 40px;
   text-align: center;
+  max-width: 90%;
+  border-radius: 20px;
 }
 
 #auth form {
@@ -102,12 +119,12 @@ table th, td {
 }
 
 table tr:nth-child(odd) td{
-  background-color: #efefef;
+  background-color: #fff;
   margin: -1px;
 }
 
 table tr:nth-child(even) td{
-  background-color: #fff;
+  background-color: #efefef;
 }
 
 .center {
@@ -123,7 +140,7 @@ table tr:nth-child(even) td{
 .wildlife img {
   border: 1px solid #cfcfcf;
   min-height: 100px;
-  width: 100%;
+  width: 90%;
 }
 
 .wildlife figcaption {
