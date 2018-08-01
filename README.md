@@ -1,6 +1,6 @@
 # Wallowa Wildlife Checklist App
 
-This app uses the Python-based microframework Flask and an SQLite3 database to allow users to log in and maintain wildlife checklists for Wallowa County. The database model supports users, checklists, types of creatures, and the creatures themselves. The Flask app builds the database from a .csv file so it is adaptable to any other location, real or imagined. 
+This app uses the Python-based microframework Flask and an SQLite3 database to allow users to log in and maintain lists of wildlife for Wallowa County in Oregon. The database model supports users, types of creatures, and the creatures themselves. The Flask app builds the database from a .csv file so it is adaptable to any other location, real or imagined. 
 
 The app is architected as an application factory using blueprints and test coverage. It was developed using the [Flaskr tutorial](http://flask.pocoo.org/docs/1.0/tutorial/) as a guide to these new features in Flask.
 
