@@ -4,45 +4,66 @@
 <section id="lists">
   <h2>Edit {{ creature.name_common }}</h2>
 
-  <p>You can leave any form entries blank if you want to leave them unchanged.</p>
+  <p class="center">To leave an item unchanged, leave it blank.</p>
 
-	<form action="{{ url_for('lists.editCreature', creature_id = creature.id)}}" method='POST'>
-		<p>Common Name: <br />
-    <input type="text" size="30" name="name_common" placeholder="{{ creature.name_common }}"> 
-		</p>
+	<form action="{{ url_for('lists.editCreature', creature_id = creature.id)}}" 
+    method="POST" class="center">
+    <h4>Common Name</h4>
+    {% if creature.name_common %}
+      <input type="text" size="30" name="name_common" placeholder="{{ creature.name_common }}">
+    {% else %}
+      <input type="text" size="30" name="name_common" placeholder="ex: Great Blue Heron">
+    {% endif %}
 		
-		<p>Latin Name: <br />
-    <input type="text" size="30" name="name_latin" placeholder="{{ creature.name_latin }}"> 
-		</p>
+    <h4>Latin Name</h4>
+    {% if creature.name_latin %}
+      <input type="text" size="30" name="name_latin" placeholder="{{ creature.name_latin }}"> 
+    {% else %}
+      <input type="text" size="30" name="name_latin" placeholder="ex: Ardea herodias"> 
+    {% endif %}
 
-		<p>Photo Attribution: <br />
-		  <input type="textbox" size="30" name="photo_attr" placeholder="Example: Jenner Hanni (CC-BY-SA 2.0)"> 
-		</p>
+    <h4>Photo Attribution</h4>
+    {% if creature.photo_attr %}
+      <input type="textbox" size="30" name="photo_attr" placeholder="{{ creature.photo_attr }}"> 
+    {% else %}
+		  <input type="textbox" size="30" name="photo_attr" placeholder="ex: Jay Photographer (CC-BY-SA 2.0)"> 
+    {% endif %}
 
-		<p>Photo URL: <br />
-    <input type="text" size="30" name="photo_url" placeholder="{{ creature.photo_url }}"> 
-		</p>
+    <h4>Photo URL</h4>
+    {% if creature.photo_url %}
+      <input type="text" size="30" name="photo_url" placeholder="{{ creature.photo_url }}"> 
+    {% else %}
+      <input type="text" size="30" name="photo_url" placeholder="ex: http://location.com/of-the-photo.jpg"> 
+    {% endif %}
 
-		<p>Wikipedia URL: <br />
-    <input type="text" size="30" name="wiki_url" placeholder="{{ creature.wiki_url }}"> 
-		</p>
+    <h4>Wikipedia URL</h4>
+    {% if creature.wiki_url%}
+      <input type="text" size="30" name="wiki_url" placeholder="{{ creature.wiki_url }}"> 
+    {% else %}
+      <input type="text" size="30" name="wiki_url" placeholder="ex: https://en.wikipedia.org/wiki/Great_blue_heron"> 
+    {% endif %}
 
-		<p>Type: <br />
-      <select name="type_id">
-        {% for t in types %}
-          {% if t.url_text == creature.type_id %}
-            <option value="{{ t.url_text }}" selected>{{ t.name }}</option>
-          {% else %}
-            <option value="{{ t.url_text }}">{{ t.name }}</option>
-          {% endif %}
-        {% endfor %}
-		</p>
+    <h4>Type</h4>
+    <select name="type_id">
+      {% for t in types %}
+        {% if t.url_text == creature.type_id %}
+          <option value="{{ t.url_text }}" selected>{{ t.name }}</option>
+        {% else %}
+          <option value="{{ t.url_text }}">{{ t.name }}</option>
+        {% endif %}
+      {% endfor %}
+    </select>
 
-    <p>
-		  <input type="submit", value="Edit">
-    </p>
+    <div class="submit-container">
+      <input class="submit" type="submit", value="Submit">
+       <a href='{{url_for('lists.showCreature', creature_id = creature.id)}}'>
+         <p class="submit cancel">
+           Cancel
+         </p>
+       </a>
+    </div>
 	</form>
+  
 
-	<a href= '{{url_for('lists.showCreature', creature_id = creature.id)}}'>Cancel</a>
 </section>
 {% endblock %}
