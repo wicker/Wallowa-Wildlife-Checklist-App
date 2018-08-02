@@ -46,6 +46,43 @@ def create_app(test_config=None):
         types = db.execute('SELECT * FROM creature_type').fetchall()
         return render_template('front_page.html', types=types)
 
+    @app.route('/wildlife/<int:creature_id>/JSON')
+    def wildlifeCreatureJSON(creature_id):
+        """Create JSON endpoint"""
+        db = get_db()
+        c = db.execute('SELECT * FROM creature WHERE id = ?',
+                       (creature_id,)).fetchone()
+        if c:
+            json_creature = {'id': c['id'],
+                             'name_common': c['name_common'],
+                             'name_latin': c['name_latin'],
+                             'photo_url': c['photo_url'],
+                             'photo_attr': c['photo_attr'],
+                             'wiki_url': c['wiki_url'],
+                             'type': c['type_id']}
+            return jsonify(json_creature)
+        else:
+            return redirect(url_for('index'))
+
+    @app.route('/wildlife/<url_text>/JSON')
+    def wildlifeTypeJSON(url_text):
+        """Create JSON endpoint"""
+        db = get_db()
+        creatures = db.execute('SELECT * FROM creature \
+                                WHERE type_id = ?',
+                               (url_text,)).fetchall()
+        if creatures:
+            json_creatures = [{'id': c['id'],
+                               'name_common': c['name_common'],
+                               'name_latin': c['name_latin'],
+                               'photo_url': c['photo_url'],
+                               'photo_attr': c['photo_attr'],
+                               'wiki_url': c['wiki_url'],
+                               'type': c['type_id']} for c in creatures]
+            return jsonify(json_creatures)
+        else:
+            return redirect(url_for('index'))
+
     @app.route('/wildlife/JSON')
     def wildlifeJSON():
         """Create JSON endpoint"""
