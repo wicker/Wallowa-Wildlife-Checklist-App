@@ -4,6 +4,8 @@ This app uses the Python-based microframework Flask and an SQLite3 database to a
 
 The app is architected as an application factory using blueprints and test coverage. It was developed using the [Flaskr tutorial](http://flask.pocoo.org/docs/1.0/tutorial/) as a guide to these new features in Flask.
 
+&raquo; [Click here for a live demo](http://wallowawildlife.com)
+
 ## Install
 
 Clone the git repository and change to the directory.
